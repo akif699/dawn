@@ -1,6 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("three-viewer.js loaded");
+
   const container = document.getElementById("three-container");
-  if (!container || typeof THREE === "undefined") return;
+  console.log("container:", container);
+
+  if (!container) {
+    console.log("Container not found");
+    return;
+  }
+
+  if (typeof THREE === "undefined") {
+    console.log("THREE not loaded");
+    return;
+  }
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, container.clientWidth / 500, 0.1, 1000);
@@ -27,12 +39,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   animate();
-
-  window.addEventListener("resize", function () {
-    const width = container.clientWidth;
-    const height = 500;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  });
 });
