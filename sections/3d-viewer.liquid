@@ -1,0 +1,34 @@
+<div id="three-container" style="width:100%; height:500px;"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.152/build/three.min.js"></script>
+
+<script>
+const container = document.getElementById('three-container');
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, container.clientWidth / 500, 0.1, 1000);
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(container.clientWidth, 500);
+container.appendChild(renderer.domElement);
+
+// lighting
+const light = new THREE.HemisphereLight(0xffffff, 0x444444);
+scene.add(light);
+
+// simple cube (test dulu)
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
+camera.position.z = 3;
+
+// animation
+function animate() {
+  requestAnimationFrame(animate);
+  cube.rotation.y += 0.01;
+  renderer.render(scene, camera);
+}
+animate();
+</script>
